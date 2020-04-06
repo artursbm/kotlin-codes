@@ -27,19 +27,24 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/todoItem"
+            android:id="@+id/newTodoItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nova_ideia"
+            android:inputType="text"
+            android:maxLines="1"
             android:padding="16dp"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textHint"
-            android:inputType="text" />
-        <ListView
+            android:importantForAutofill="no" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todoList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/todoItem" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newTodoItem"
+            android:layout_marginTop="10dp"
+            android:scrollbars="vertical" />
 
     </RelativeLayout>
 
