@@ -5,14 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appbox.R
 import com.example.appbox.todos.models.Todo
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.todo_item_view.view.*
 
-class TodoListAdapter(private val todos: List<Todo>, private val context: Context) :
+class TodoListAdapter(private val todos: ArrayList<Todo>, private val context: Context) :
     RecyclerView.Adapter<TodoListAdapter.TodoItemHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemHolder {
@@ -24,16 +23,20 @@ class TodoListAdapter(private val todos: List<Todo>, private val context: Contex
         val todo = todos[position]
         holder.itemView.todoItem.text = todo.todoText
         holder.itemView.deleteBtn.setOnClickListener(View.OnClickListener {
-            Log.d("DELETE", "ITEM $position")
+            Log.d("DELETE", "$position")
+            Snackbar.make(it.rootView, R.string.deleteBtnTxt, Snackbar.LENGTH_SHORT).show()
+            todos.remove(todo)
             notifyItemRemoved(position)
         })
+
     }
 
-    override fun getItemCount() = todos.size
+    override fun getItemCount(): Int {
+        return todos.size
+    }
 
     class TodoItemHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var mTodo = v.todoItem
         private var mDeleteBtn = v.deleteBtn
-
     }
 }

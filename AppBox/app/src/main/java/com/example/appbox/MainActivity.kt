@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var todoListRecyclerView: RecyclerView
     private lateinit var todoViewAdapter: RecyclerView.Adapter<*>
+    private val itemList = arrayListOf<Todo>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -21,21 +21,20 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        // this will add the layout manager that makes recycler view works,
-        // and will set the todoList to be managed by the layout manager
-        var itemList = listOf<Todo>()
         linearLayoutManager = LinearLayoutManager(this)
         todoViewAdapter = TodoListAdapter(itemList, this)
-
-        todoList.apply {
-            layoutManager = linearLayoutManager
-            adapter = todoViewAdapter
-        }
+        todoList.layoutManager = linearLayoutManager
+        todoList.adapter = todoViewAdapter
 
         addNote.setOnClickListener { view ->
-//            itemList(newTodoItem.text.toString())
-            newTodoItem.text = null
-            Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_SHORT).show()
+            if (newTodoItem.text.isNotBlank() || newTodoItem.text.isNotEmpty()) {
+                val todo = Todo(newTodoItem.text.toString())
+                itemList.add(todo)
+                todoViewAdapter.notifyDataSetChanged()
+                newTodoItem.text = null
+                Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_SHORT).show()
+            }
+            Snackbar.make(view, R.string.please_insert_note, Snackbar.LENGTH_SHORT).show()
 
         }
     }

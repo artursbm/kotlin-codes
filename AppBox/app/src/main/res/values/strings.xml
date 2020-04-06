@@ -12,6 +12,7 @@
     <string name="texto">TEXTO </string>
     <string name="nova_ideia">Nova ideia</string>
     <string name="added_idea">Ideia adicionada!</string>
+    <string name="please_insert_note">Digite algo!</string>
     <string name="deleteBtnTxt">DELETE</string>
 
 </resources>
