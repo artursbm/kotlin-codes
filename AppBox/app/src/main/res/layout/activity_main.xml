@@ -34,12 +34,8 @@
             android:inputType="text"
             android:padding="16dp"
             android:textColor="@color/textColor"
-            android:textColorHint="@color/textHint" />
-        <!--        <ListView-->
-        <!--            android:id="@+id/todoList"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_below="@id/todoItem" />-->
+            android:textColorHint="@color/textHint"
+            android:importantForAutofill="no" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todoList"
