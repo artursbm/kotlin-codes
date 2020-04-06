@@ -22,15 +22,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         // this will add the layout manager that makes recycler view works,
         // and will set the todoList to be managed by the layout manager
+        var itemList = arrayListOf<String>()
         linearLayoutManager = LinearLayoutManager(this)
-        todoViewAdapter = TodoListAdapter(arrayListOf())
+        todoViewAdapter = TodoListAdapter(itemList)
 
         todoList.apply {
             layoutManager = linearLayoutManager
             adapter = todoViewAdapter
         }
-
-        var itemList = arrayListOf<String>()
 
         addNote.setOnClickListener { view ->
             itemList.add(newTodoItem.text.toString())

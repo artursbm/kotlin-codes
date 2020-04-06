@@ -1,10 +1,9 @@
 package com.example.appbox.todos
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appbox.R
 
@@ -12,31 +11,31 @@ class TodoListAdapter(private val todos: ArrayList<String>) :
     RecyclerView.Adapter<TodoListAdapter.TodoItemHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemHolder {
-        val todoView = LayoutInflater.from(parent.context).inflate(R.layout.todo_item_view, parent, false)
-        return TodoItemHolder(todoView)
+        val inflater = LayoutInflater.from(parent.context)
+        return TodoItemHolder(inflater, parent)
+    }
+
+    override fun onBindViewHolder(holder: TodoItemHolder, position: Int) {
+        val todoItem: String = todos[position]
+        holder.bind(todoItem)
     }
 
     override fun getItemCount() = todos.size
 
-    override fun onBindViewHolder(holder: TodoItemHolder, position: Int) {
-
-    }
-
-    class TodoItemHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        private var view: View = v
-        private var todo: String? = null
-        private var deleteBtn: ImageButton? = null
+    class TodoItemHolder(inflater: LayoutInflater, parent: ViewGroup) :
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.todo_item_view, parent, false)) {
+        private var mTodo: TextView? = null
+        private var mDeleteBtn: ImageButton? = null
 
         init {
-            v.setOnClickListener(this)
+            mTodo = itemView.findViewById(R.id.todoItem)
+            mDeleteBtn = itemView.findViewById(R.id.deleteBtn)
         }
 
-        override fun onClick(v: View) {
-            Log.d("RecyclerView", "CLICKED")
+        fun bind(todoItem: String) {
+            mTodo?.text = todoItem
         }
 
-        companion object {
-            private val TODO_KEY = "TODO"
-        }
+
     }
 }
