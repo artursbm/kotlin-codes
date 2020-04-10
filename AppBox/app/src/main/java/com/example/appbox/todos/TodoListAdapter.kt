@@ -23,9 +23,12 @@ class TodoListAdapter(private val todos: ArrayList<Todo>, private val context: C
         val todo = todos[position]
         holder.itemView.todoItem.text = todo.todoText
         holder.itemView.deleteBtn.setOnClickListener(View.OnClickListener {
-            Log.d("DELETE", "$position")
             Snackbar.make(it.rootView, R.string.deleteBtnTxt, Snackbar.LENGTH_SHORT).show()
-            todos.remove(todo)
+            if (todos.size == 1) {
+                todos.clear()
+            } else {
+                todos.remove(todo)
+            }
             notifyItemRemoved(position)
         })
 

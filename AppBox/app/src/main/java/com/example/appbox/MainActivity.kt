@@ -33,8 +33,9 @@ class MainActivity : AppCompatActivity() {
                 todoViewAdapter.notifyDataSetChanged()
                 newTodoItem.text = null
                 Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_SHORT).show()
+            } else {
+                Snackbar.make(view, R.string.please_insert_note, Snackbar.LENGTH_SHORT).show()
             }
-            Snackbar.make(view, R.string.please_insert_note, Snackbar.LENGTH_SHORT).show()
 
         }
     }
