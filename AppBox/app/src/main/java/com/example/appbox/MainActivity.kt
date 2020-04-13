@@ -1,5 +1,6 @@
 package com.example.appbox
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,13 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appbox.todos.TodoListAdapter
 import com.example.appbox.todos.models.Todo
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var todoViewAdapter: RecyclerView.Adapter<*>
-    private val itemList = arrayListOf<Todo>()
+    private var itemList = arrayListOf<Todo>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,8 +39,30 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Snackbar.make(view, R.string.please_insert_note, Snackbar.LENGTH_SHORT).show()
             }
-
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val json: String? = sharedPreferences.getString(R.string.saved_list_key.toString(), null)
+        val todosType = object : TypeToken<ArrayList<Todo>>() {}.type
+        Gson().fromJson<ArrayList<Todo>>(json, todosType)?.let {
+            itemList.addAll(Gson().fromJson<ArrayList<Todo>>(json, todosType))
+            todoViewAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val json: String = Gson().toJson(itemList)
+        with(sharedPreferences.edit()) {
+            putString(R.string.saved_list_key.toString(), json)
+            apply()
+        }
+
     }
 
 }
