@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE) ?: return
         val json: String = Gson().toJson(itemList)
+        itemList.clear()
         with(sharedPreferences.edit()) {
             putString(R.string.saved_list_key.toString(), json)
             apply()
