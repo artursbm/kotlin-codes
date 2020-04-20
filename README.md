@@ -9,6 +9,9 @@ First Android application made with Kotlin, a simple todo app. It is able to add
 ### Future improvements:
 - ~~Change ListView to the new RecyclerView structure;~~
 - ~~Delete an item from the list;~~
-- ~~Fix bug of deleting out of order and leave the last item "undeleteable".~~
+- ~~Fix bug of deleting out of order and leave the last item "undeleteable";~~
+- ~~Save list on local storage every time app quit (persist list);~~
+- ~~Fix bug of duplicating list when pausing app (put it in background);
+- __TODO feature__: Clean list option;
 - Expand the view of an item, maybe to edit, or to see an image attached to it;
 - settings to increase font size;
