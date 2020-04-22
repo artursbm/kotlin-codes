@@ -1,4 +1,4 @@
-package com.example.appbox.todos
+package com.example.appbox.todos.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,7 +15,9 @@ class TodoListAdapter(private val todos: ArrayList<Todo>, private val context: C
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.todo_item_view, parent, false)
-        return TodoItemHolder(view)
+        return TodoItemHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: TodoItemHolder, position: Int) {
@@ -39,7 +41,6 @@ class TodoListAdapter(private val todos: ArrayList<Todo>, private val context: C
 
     class TodoItemHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var mTodo = v.todoItem
-        private var mDeleteBtn = v.deleteBtn
 
         fun bind(todo: Todo) {
             mTodo.text = todo.todoText

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appbox.todos.TodoListAdapter
+import com.example.appbox.todos.adapters.TodoListAdapter
 import com.example.appbox.todos.models.Todo
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         linearLayoutManager = LinearLayoutManager(this)
-        todoViewAdapter = TodoListAdapter(itemList, this)
+        todoViewAdapter =
+            TodoListAdapter(itemList, this)
         todoList.layoutManager = linearLayoutManager
         todoList.adapter = todoViewAdapter
 
@@ -48,8 +49,8 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = this.getPreferences(Context.MODE_PRIVATE) ?: return
         val json: String? = sharedPreferences.getString(R.string.saved_list_key.toString(), null)
         val todosType = object : TypeToken<ArrayList<Todo>>() {}.type
-        Gson().fromJson<ArrayList<Todo>>(json, todosType)?.let {
-            itemList.addAll(Gson().fromJson<ArrayList<Todo>>(json, todosType))
+        Gson().fromJson<ArrayList<Todo>>(json, todosType)?.let { todoListFromJson ->
+            itemList.addAll(todoListFromJson)
             todoViewAdapter.notifyDataSetChanged()
         }
     }
