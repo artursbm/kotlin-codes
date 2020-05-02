@@ -32,6 +32,10 @@ fun main() {
         printAnswer(it)
     }
 
+    // A way to create an array of nullable values. It is used when you don't kno
+    val nullableInts = arrayOfNulls<Int>(5)
+
+
 }
 
 fun printAnswer(ans: Int) {

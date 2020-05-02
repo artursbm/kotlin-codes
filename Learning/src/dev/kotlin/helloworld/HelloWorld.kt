@@ -1,4 +1,4 @@
-package academy.kotlin.helloworld
+package dev.kotlin.helloworld
 
 // Kotlin tries to reduce the amount of code written in a file, and for that, it imports automatically in all kotlin
 // files the most used packages, which happens to be inside kotlin-stdlib (Kotlin Standard Library).
